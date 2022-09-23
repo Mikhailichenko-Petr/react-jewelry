@@ -1,0 +1,104 @@
+[
+      {
+        "id": 0,
+        "imageUrl": "https://g5.sunlight.net/media/i/380/85/products/0e804ade-1adb-11ec-8262-005056b30bd2.jpg ",
+        "name": "Бриллианты Якутии",
+        "types": [0, 1],
+        "sizes": [26, 30, 40],
+        "price": 4990,
+        "category": 0,
+        "rating": 4
+      },
+      {
+        "id": 1,
+        "imageUrl": "https://g7.sunlight.net/media/i/380/85/products/00aef395867980ee07088361af604cde594cc24c.jpg",
+        "name": "кольцо с фианитами",
+        "types": [0],
+        "sizes": [26, 40],
+        "price": 9900,
+        "category": 1,
+        "rating": 6
+      },
+      {
+        
+        "id": 2,
+        "imageUrl": "https://g2.sunlight.net/media/i/380/85/products/3681e187e9a0548c09c87512b0757383251fff72.jpg",
+        "name": "Подвеска c фианитaми",
+        "types": [0],
+        "sizes": [26, 40],
+        "price": 990,
+        "category": 1,
+        "rating": 4
+      },
+      {
+        
+        "id": 3,
+        "imageUrl":"https://g1.sunlight.net/media/i/380/85/products/7fb5911ff0caaf02ee20234a99540be478dd9655.jpg",
+        "name": "Кольцо, вставка: фианит",
+        "types": [1],
+        "sizes": [26, 30, 40],
+        "price": 7490,
+        "category": 2,
+        "rating": 2
+      },
+      {
+        "id": 4,
+        "imageUrl": "https://g0.sunlight.net/media/i/380/85/products/9cedbd38cd7a6ddfae00e483fb01841f17bdaed7.jpg",
+        "name": "Кольцо, вставка: фианит",
+        "types": [0, 1],
+        "sizes": [26, 30, 40],
+        "price": 7490,
+        "category": 3,
+        "rating": 8
+      },
+      {
+        "id": 5,
+        "imageUrl": "https://g7.sunlight.net/media/i/380/85/products/2e4155d66deb9990aca3a91009bc66ad41c2c1d6.jpg",
+        "name": "Кольцо, вставка: фианит",
+        "types": [0],
+        "sizes": [30, 40],
+        "price": 5490,
+        "category": 2,
+        "rating": 2
+      },
+      {
+        "id": 6,
+        "imageUrl": "https://g8.sunlight.net/media/i/380/85/products/e483f70b966959c14f293c5eeb57f0b9dbbdc002.jpg",
+        "name": "Кольцо с 24 бриллиантами",
+        "types": [0, 1],
+        "sizes": [26, 30, 40],
+        "price": 11490,
+        "category": 1,
+        "rating": 9
+      },
+      {
+        "id": 7,
+        "imageUrl": "https://g6.sunlight.net/media/i/380/85/products/3487580d4ae3f2be66a5d3039a8e1febb8ebe226.jpg",
+        "name": "Серьги с 6 бриллиантами",
+        "types": [0, 1],
+        "sizes": [26, 30, 40],
+        "price": 13490,
+        "category": 4,
+        "rating": 10
+      },
+      {
+        "id": 8,
+        "imageUrl": "https://g1.sunlight.net/media/i/380/85/products/cc3af55c59d2d61c0082ae73553b15b77b1f90b8.jpg",
+        "name": "Серьги с 36 бриллиантами",
+        "types": [0, 1],
+        "sizes": [26, 30, 40],
+        "price": 16990,
+        "category": 5,
+        "rating": 10
+      },
+      {
+        "id": 9,
+        "imageUrl": "https://g4.sunlight.net/media/i/380/85/products/356df115b8c24010ddf068601dfc06e4be050603.jpg",
+        "name": "Бриллианты Якутии",
+        "types": [0, 1],
+        "sizes": [26, 30, 40],
+        "price": 17990,
+        "category": 5,
+        "rating": 7
+      }
+    ]
