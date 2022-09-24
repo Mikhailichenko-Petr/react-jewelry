@@ -7,7 +7,7 @@ const Header = () => {
         <div className="header__logo">
           <img width="38" src={logo} alt="Jewelry logo" />
           <div>
-            <h1>React Jewelry</h1>
+            <h1>PM Jewelry</h1>
             <p>лучшие украшения во вселенной</p>
           </div>
         </div>
