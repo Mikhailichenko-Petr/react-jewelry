@@ -3,7 +3,7 @@ import { useState } from 'react';
 const Categories = () => {
   const [activeCategory, setActiveCategory] = useState(0);
 
-  const category = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
+  const category = ['Все', 'Кольца', 'Серьги', 'Браслеты', 'Подвески', 'Цепи'];
 
   return (
     <div className="categories">

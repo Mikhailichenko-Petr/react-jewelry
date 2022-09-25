@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const JewelryBlock = ({ title, price, imageUrl, sizes, types }) => {
+const JewelryBlock = ({ name, price, imageUrl, sizes, types }) => {
   const [activeSize, setActiveSize] = useState(sizes[0]);
   const [activeType, setActiveType] = useState(types[0]);
   const typeName = ['самовывоз', 'доставка'];
@@ -8,7 +8,7 @@ const JewelryBlock = ({ title, price, imageUrl, sizes, types }) => {
   return (
     <div className="pizza-block">
       <img className="pizza-block__image" src={imageUrl} alt="Ring" />
-      <h4 className="pizza-block__title">{title}</h4>
+      <h4 className="pizza-block__title">{name}</h4>
       <div className="pizza-block__selector">
         <ul>
           {types.map((typesId) => (
