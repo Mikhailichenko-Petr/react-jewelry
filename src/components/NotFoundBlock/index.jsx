@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import styles from './NotFound.module.scss';
 
 const NotFoundBlock = () => {
@@ -5,7 +7,7 @@ const NotFoundBlock = () => {
     <div className={styles.root}>
       <h1>
         К сожалению, подходящих товаров не найдено, но вы можете вернуться в{' '}
-        <a href="##">каталог</a>
+        <Link to="/">каталог</Link>
       </h1>
     </div>
   );
