@@ -14,10 +14,11 @@ export const Home = () => {
       setItem(data.data);
       setLoading(false);
     });
+    window.scrollTo(0, 0); //скролит наверх при рендеренге
   }, []);
 
   return (
-    <>
+    <div className="container">
       <div className="content__top">
         <Categories />
         <Sort />
@@ -28,6 +29,6 @@ export const Home = () => {
           ? [...new Array(6)].map((_, index) => <Skeleton />)
           : item.map((obj) => <JewelryBlock key={obj.id} {...obj} />)}
       </div>
-    </>
+    </div>
   );
 };
