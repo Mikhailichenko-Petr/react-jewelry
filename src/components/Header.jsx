@@ -1,6 +1,9 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { SearchContext } from '../App';
 
 import logo from '../assets/img/Jewelry-icon.png';
+import Search from './search/search';
 
 const Header = () => {
   return (
@@ -15,6 +18,7 @@ const Header = () => {
             </div>
           </div>
         </Link>
+        <Search />
         <div className="header__cart">
           <Link to="/cart" className="button button--cart">
             <span>520 ₽</span>
