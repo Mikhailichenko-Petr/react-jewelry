@@ -2,7 +2,6 @@ import { createContext, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header';
-import Search from './components/search/search';
 import { Cart } from './pages/Cart';
 import { Home } from './pages/Home';
 import { NotFound } from './pages/NotFound';
