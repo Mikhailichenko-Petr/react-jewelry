@@ -1,21 +1,35 @@
-import { useEffect } from 'react';
+import debounce from 'lodash.debounce';
 import { useRef } from 'react';
+import { useCallback } from 'react';
+import { useState } from 'react';
 import { useContext } from 'react';
+
 import { SearchContext } from '../../App';
+
 import styles from './search.module.scss';
 
 const Search = () => {
-  const { searchValue, setSearchValue } = useContext(SearchContext);
+  const [value, setValue] = useState(''); // локальный стейт для debounce
+  const { setSearchValue } = useContext(SearchContext);
   const inputRef = useRef(); // обращение к элементу
+
+  const updateSearchInput = useCallback(
+    debounce((str) => {
+      setSearchValue(str);
+    }, 200),
+    [],
+  ); // срабатывает перерисовка функции только после debounce
+
+  const onChangeInput = (e) => {
+    setValue(e.target.value);
+    updateSearchInput(e.target.value);
+  };
 
   const onClickClear = () => {
     setSearchValue('');
+    setValue('');
     inputRef.current.focus();
   };
-
-  useEffect(() => {
-    console.log(document.querySelector('input'));
-  }, []);
 
   return (
     <div className={styles.root}>
@@ -56,10 +70,10 @@ const Search = () => {
         ref={inputRef}
         placeholder="Поиск пиццы..."
         className={styles.input}
-        onChange={(e) => setSearchValue(e.target.value)}
-        value={searchValue}
+        onChange={onChangeInput}
+        value={value}
       />{' '}
-      {searchValue && (
+      {value && (
         <svg
           className={styles.clearIcon}
           onClick={onClickClear}

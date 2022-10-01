@@ -7,16 +7,15 @@ import Categories from '../components/Categories';
 import JewelryBlock from '../components/jewelryBlock';
 import { Skeleton } from '../components/jewelryBlock/skeleton';
 import Pagination from '../components/pagination/pegination';
-import { setCategory } from '../redux/slices/filterSlice';
+import { setCategory, setPage } from '../redux/slices/filterSlice';
 import { SearchContext } from '../App';
 
 export const Home = () => {
-  const category = useSelector((state) => state.filterSlice.category);
+  const { category, page } = useSelector((state) => state.filterSlice);
   const dispatch = useDispatch();
 
   const [item, setItem] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
   const [sortActive, setSortActive] = useState({ name: 'популярности', type: 'rating' });
   const { searchValue } = useContext(SearchContext); // CONTEXT
 
@@ -24,11 +23,15 @@ export const Home = () => {
     dispatch(setCategory(id));
   };
 
+  const setChangePage = (num) => {
+    dispatch(setPage(num));
+  };
+
   useEffect(() => {
     setLoading(true);
     axios
       .get(
-        `https://632e4bcbf9b533cc58ee4523.mockapi.io/items/?page=${currentPage}&limit=8&sortBy=${
+        `https://632e4bcbf9b533cc58ee4523.mockapi.io/items/?page=${page}&limit=8&sortBy=${
           sortActive.type
         }&order='asc'${searchValue ? `?&search=${searchValue}` : ''}&${
           category > 0 ? `category=${category}` : ''
@@ -39,7 +42,7 @@ export const Home = () => {
         setLoading(false);
       });
     window.scrollTo(0, 0); //скролит наверх при рендеренге
-  }, [category, sortActive, currentPage]);
+  }, [category, sortActive, page]);
 
   return (
     <div className="container">
@@ -60,7 +63,7 @@ export const Home = () => {
               })
               .map((obj) => <JewelryBlock key={obj.id} {...obj} />)}
       </div>
-      <Pagination onChangePage={(index) => setCurrentPage(index)} />
+      <Pagination cuurentPage={page} onChangePage={(index) => setChangePage(index)} />
     </div>
   );
 };
