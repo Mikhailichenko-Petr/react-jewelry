@@ -3,20 +3,22 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-import Sort from '../components/Sort';
+import Sort, { sortType } from '../components/Sort';
 import Categories from '../components/Categories';
 import JewelryBlock from '../components/jewelryBlock';
 import { Skeleton } from '../components/jewelryBlock/skeleton';
 import Pagination from '../components/pagination/pegination';
-import { setCategory, setPage } from '../redux/slices/filterSlice';
+import { setCategory, setFilters, setPage } from '../redux/slices/filterSlice';
 import { SearchContext } from '../App';
 import QueryString from 'qs';
+import { useRef } from 'react';
 
 export const Home = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // создает URL
   const { category, page, sort } = useSelector((state) => state.filterSlice);
   const dispatch = useDispatch();
-
+  const isSearch = useRef(false);
+  const isUrl = useRef(false);
   const [item, setItem] = useState([]);
   const [loading, setLoading] = useState(true);
   const { searchValue } = useContext(SearchContext); // CONTEXT
@@ -29,7 +31,7 @@ export const Home = () => {
     dispatch(setPage(num));
   };
 
-  useEffect(() => {
+  const fetchPizzas = () => {
     setLoading(true);
     axios
       .get(
@@ -43,17 +45,44 @@ export const Home = () => {
         setItem(data.data);
         setLoading(false);
       });
-    window.scrollTo(0, 0); //скролит наверх при рендеренге
-  }, [category, sort, page]);
+  };
 
+  // Если изменили параметры и был первый рендер
   useEffect(() => {
-    const quertyString = QueryString.stringify({
-      sortProperty: sort.type,
-      category,
-      page,
-    });
-    navigate(`?${quertyString}`);
-  }, [category, sort, page]);
+    if (isUrl.current) {
+      const quertyString = QueryString.stringify({
+        sortProperty: sort.type,
+        category,
+        page,
+      }); // создаем URL
+      navigate(`?${quertyString}`);
+    }
+    isUrl.current = true;
+  }, [category, sort.type, page]);
+
+  // Если был первый рендер, то проверяем URl-параметры и сохраняем в STATE
+  useEffect(() => {
+    if (window.location.search) {
+      const params = QueryString.parse(window.location.search.substring(1));
+      const sort = sortType.find((obj) => obj.type === params.sortProperty);
+      dispatch(
+        setFilters({
+          ...params,
+          sort,
+        }),
+      );
+      isSearch.current = true;
+    } // передает в STATE URL
+  }, []);
+
+  // Если был первый рендер, то запрашиваем пиццы
+  useEffect(() => {
+    window.scrollTo(0, 0); //скролит наверх при рендеренге
+    if (!isSearch.current) {
+      fetchPizzas();
+    }
+    isSearch.current = false;
+  }, [category, sort.type, searchValue, page]);
 
   return (
     <div className="container">

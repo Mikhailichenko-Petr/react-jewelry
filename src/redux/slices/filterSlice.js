@@ -4,6 +4,7 @@ const initialState = {
   category: 0,
   page: 1,
   sort: { name: 'популярности', type: 'rating' },
+  filters: '',
 };
 
 const filterSlice = createSlice({
@@ -19,9 +20,14 @@ const filterSlice = createSlice({
     setPage: (state, action) => {
       state.page = action.payload;
     },
+    setFilters: (state, action) => {
+      state.filters = action.payload.page;
+      state.category = action.payload.category;
+      state.sort = action.payload.sort;
+    },
   },
 });
 
-export const { setCategory, setSort, setPage } = filterSlice.actions;
+export const { setCategory, setSort, setPage, setFilters } = filterSlice.actions;
 
 export default filterSlice.reducer;
