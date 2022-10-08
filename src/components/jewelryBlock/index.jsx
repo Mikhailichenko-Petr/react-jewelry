@@ -1,9 +1,24 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setItems } from '../../redux/slices/cartSlice';
 
 const JewelryBlock = ({ name, price, imageUrl, sizes, types }) => {
+  const dispatch = useDispatch();
   const [activeSize, setActiveSize] = useState(sizes[0]);
   const [activeType, setActiveType] = useState(types[0]);
   const typeName = ['самовывоз', 'доставка'];
+
+  const onClick = () => {
+    const items = {
+      name,
+      price,
+      imageUrl,
+      sizes,
+      types,
+    };
+
+    dispatch(setItems(items));
+  };
 
   return (
     <div className="jewelry-block-wrapper">
@@ -34,7 +49,7 @@ const JewelryBlock = ({ name, price, imageUrl, sizes, types }) => {
         </div>
         <div className="jewelry-block__bottom">
           <div className="jewelry-block__price">{price} ₽</div>
-          <button className="button button--outline button--add">
+          <button onClick={onClick} className="button button--outline button--add">
             <svg
               width="12"
               height="12"
