@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setItems } from '../../redux/slices/cartSlice';
 
-const JewelryBlock = ({ name, price, imageUrl, sizes, types }) => {
+const JewelryBlock = ({ id, name, price, imageUrl, sizes, types }) => {
+  const cartItem = useSelector((state) => state.cartSlice.items.find((obj) => obj.id === id));
   const dispatch = useDispatch();
   const [activeSize, setActiveSize] = useState(sizes[0]);
   const [activeType, setActiveType] = useState(types[0]);
@@ -10,15 +11,17 @@ const JewelryBlock = ({ name, price, imageUrl, sizes, types }) => {
 
   const onClick = () => {
     const items = {
+      id,
       name,
       price,
       imageUrl,
       sizes,
       types,
     };
-
     dispatch(setItems(items));
   };
+
+  const count = cartItem ? cartItem.count : 0;
 
   return (
     <div className="jewelry-block-wrapper">
@@ -62,7 +65,7 @@ const JewelryBlock = ({ name, price, imageUrl, sizes, types }) => {
               />
             </svg>
             <span>Добавить</span>
-            <i>0</i>
+            {count > 0 && <i>{count}</i>}
           </button>
         </div>
       </div>
