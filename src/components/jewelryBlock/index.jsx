@@ -15,12 +15,13 @@ const JewelryBlock = ({ id, name, price, imageUrl, sizes, types }) => {
       name,
       price,
       imageUrl,
-      sizes,
-      types,
+      sizes: sizes[activeSize],
+      types: typeName[activeType],
     };
+    console.log(items.sizes, 'bla');
     dispatch(setItems(items));
   };
-
+  console.log(id, name, price, imageUrl, sizes, types);
   const count = cartItem ? cartItem.count : 0;
 
   return (
@@ -30,12 +31,12 @@ const JewelryBlock = ({ id, name, price, imageUrl, sizes, types }) => {
         <h4 className="jewelry-block__title">{name}</h4>
         <div className="jewelry-block__selector">
           <ul>
-            {types.map((typesId) => (
+            {types.map((index) => (
               <li
-                key={typesId}
-                onClick={() => setActiveType(typesId)}
-                className={activeType === typesId ? 'active' : ''}>
-                {typeName[typesId]}
+                key={index}
+                onClick={() => setActiveType(index)}
+                className={activeType === index ? 'active' : ''}>
+                {typeName[index]}
               </li>
             ))}
           </ul>

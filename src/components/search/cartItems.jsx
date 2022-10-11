@@ -1,6 +1,4 @@
 const CartItems = ({ id, name, types, price, count, imageUrl }) => {
-  const typeName = ['самовывоз', 'доставка'];
-
   return (
     <div className="cart__item">
       <div className="cart__item-img">
@@ -12,7 +10,7 @@ const CartItems = ({ id, name, types, price, count, imageUrl }) => {
       </div>
       <div className="cart__item-info">
         <h3>{name}</h3>
-        <p>{typeName[types]}, 26 см.</p>
+        <p>{types}, 26 см.</p>
       </div>
       <div className="cart__item-count">
         <div className="button button--outline button--circle cart__item-count-minus">
