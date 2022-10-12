@@ -5,7 +5,7 @@ import { setItems } from '../../redux/slices/cartSlice';
 const JewelryBlock = ({ id, name, price, imageUrl, sizes, types }) => {
   const cartItem = useSelector((state) => state.cartSlice.items.find((obj) => obj.id === id));
   const dispatch = useDispatch();
-  const [activeSize, setActiveSize] = useState(sizes[0]);
+  const [activeSize, setActiveSize] = useState(0);
   const [activeType, setActiveType] = useState(types[0]);
   const typeName = ['самовывоз', 'доставка'];
 
@@ -18,7 +18,7 @@ const JewelryBlock = ({ id, name, price, imageUrl, sizes, types }) => {
       sizes: sizes[activeSize],
       types: typeName[activeType],
     };
-    console.log(items.sizes, 'bla');
+    console.log(sizes, 'bla', activeSize);
     dispatch(setItems(items));
   };
   console.log(id, name, price, imageUrl, sizes, types);
@@ -31,22 +31,22 @@ const JewelryBlock = ({ id, name, price, imageUrl, sizes, types }) => {
         <h4 className="jewelry-block__title">{name}</h4>
         <div className="jewelry-block__selector">
           <ul>
-            {types.map((index) => (
+            {types.map((typeId) => (
               <li
-                key={index}
-                onClick={() => setActiveType(index)}
-                className={activeType === index ? 'active' : ''}>
-                {typeName[index]}
+                key={typeId}
+                onClick={() => setActiveType(typeId)}
+                className={activeType === typeId ? 'active' : ''}>
+                {typeName[typeId]}
               </li>
             ))}
           </ul>
           <ul>
-            {sizes.map((size) => (
+            {sizes.map((obj, index) => (
               <li
-                key={size}
-                onClick={() => setActiveSize(size)}
-                className={activeSize === size ? 'active' : ''}>
-                {size} см.
+                key={index}
+                onClick={() => setActiveSize(index)}
+                className={activeSize === index ? 'active' : ''}>
+                {obj} см.
               </li>
             ))}
           </ul>
