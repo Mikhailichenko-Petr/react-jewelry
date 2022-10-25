@@ -25,7 +25,6 @@ const Sort = () => {
     const heandelClick = (e) => {
       if (!e.path.includes(sortRef.current)) {
         setOpen(false);
-        console.log('dsfsd');
       }
     };
     document.body.addEventListener('click', heandelClick);

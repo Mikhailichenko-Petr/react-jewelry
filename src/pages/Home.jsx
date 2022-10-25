@@ -1,7 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
+import { SearchContext } from '../App';
 import { useNavigate } from 'react-router-dom';
+import QueryString from 'qs';
+import { useRef } from 'react';
 
 import Sort, { sortType } from '../components/Sort';
 import Categories from '../components/Categories';
@@ -9,17 +12,16 @@ import JewelryBlock from '../components/jewelryBlock';
 import { Skeleton } from '../components/jewelryBlock/skeleton';
 import Pagination from '../components/pagination/pegination';
 import { setCategory, setFilters, setPage } from '../redux/slices/filterSlice';
-import { SearchContext } from '../App';
-import QueryString from 'qs';
-import { useRef } from 'react';
+import { setItems } from '../redux/slices/jewelrySlice';
 
 export const Home = () => {
   const navigate = useNavigate(); // создает URL
   const { category, page, sort } = useSelector((state) => state.filterSlice);
+  const { items } = useSelector((state) => state.jewelrySlice);
+  console.log(items);
   const dispatch = useDispatch();
   const isSearch = useRef(false);
   const isUrl = useRef(false);
-  const [item, setItem] = useState([]);
   const [loading, setLoading] = useState(true);
   const { searchValue } = useContext(SearchContext); // CONTEXT
 
@@ -31,20 +33,27 @@ export const Home = () => {
     dispatch(setPage(num));
   };
 
-  const fetchPizzas = () => {
+  const fetchPizzas = async () => {
     setLoading(true);
-    axios
-      .get(
+
+    try {
+      const res = await axios.get(
         `https://632e4bcbf9b533cc58ee4523.mockapi.io/items/?page=${page}&limit=8&sortBy=${
           sort.type
         }&order='asc'${searchValue ? `?&search=${searchValue}` : ''}&${
           category > 0 ? `category=${category}` : ''
         }`,
-      )
-      .then((data) => {
-        setItem(data.data);
-        setLoading(false);
-      });
+      );
+      dispatch(setItems(res.data));
+      setLoading(false);
+      console.log('try');
+    } catch (error) {
+      setLoading(false);
+      console.log(error, 'catch');
+      alert('ошибка при получении пицц');
+    }
+
+    window.scrollTo(0, 0);
   };
 
   // Если изменили параметры и был первый рендер
@@ -94,7 +103,7 @@ export const Home = () => {
       <div className="content__items">
         {loading
           ? [...new Array(10)].map((_, index) => <Skeleton key={index} />)
-          : item
+          : items
               .filter((obj) => {
                 if (obj.name.toLowerCase().includes(searchValue.toLowerCase())) {
                   return true;

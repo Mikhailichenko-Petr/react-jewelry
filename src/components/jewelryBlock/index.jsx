@@ -21,7 +21,7 @@ const JewelryBlock = ({ id, name, price, imageUrl, sizes, types }) => {
     console.log(sizes, 'bla', activeSize);
     dispatch(setItems(items));
   };
-  console.log(id, name, price, imageUrl, sizes, types);
+
   const count = cartItem ? cartItem.count : 0;
 
   return (
