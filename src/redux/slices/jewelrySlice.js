@@ -1,4 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+const fetchJewelry = createAsyncThunk('jewelry/fetchJeweleryStatus', async () => {
+  const res = await axios.get(
+    `https://632e4bcbf9b533cc58ee4523.mockapi.io/items/?page=${page}&limit=8&sortBy=${
+      sort.type
+    }&order='asc'${searchValue ? `?&search=${searchValue}` : ''}&${
+      category > 0 ? `category=${category}` : ''
+    }`,
+  );
+  return res;
+});
 
 const initialState = {
   items: [],

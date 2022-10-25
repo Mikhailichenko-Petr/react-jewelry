@@ -4,15 +4,15 @@
 @import 'components/all';
 
 body {
-  // background-color: $background;
-  background-color: rgb(150, 0, 0);//чтобы не било по глазам
+  background-color: $background;
+  // background-color: rgb(150, 0, 0);//чтобы не било по глазам
 }
 
 .wrapper {
   width: calc(100vw - 100px);
   height: 100%;
-  // background-color: #fff;
-  background-color: rgb(17, 64, 95);//чтобы не било по глазам
+  background-color: #fff;
+  // background-color: rgb(17, 64, 95);//чтобы не било по глазам
   margin: 50px auto;
   border-radius: 10px;
   max-width: 1400px;

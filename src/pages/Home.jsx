@@ -12,7 +12,7 @@ import JewelryBlock from '../components/jewelryBlock';
 import { Skeleton } from '../components/jewelryBlock/skeleton';
 import Pagination from '../components/pagination/pegination';
 import { setCategory, setFilters, setPage } from '../redux/slices/filterSlice';
-import { setItems } from '../redux/slices/jewelrySlice';
+import { setItems, feth } from '../redux/slices/jewelrySlice';
 
 export const Home = () => {
   const navigate = useNavigate(); // создает URL
@@ -37,13 +37,6 @@ export const Home = () => {
     setLoading(true);
 
     try {
-      const res = await axios.get(
-        `https://632e4bcbf9b533cc58ee4523.mockapi.io/items/?page=${page}&limit=8&sortBy=${
-          sort.type
-        }&order='asc'${searchValue ? `?&search=${searchValue}` : ''}&${
-          category > 0 ? `category=${category}` : ''
-        }`,
-      );
       dispatch(setItems(res.data));
       setLoading(false);
       console.log('try');
