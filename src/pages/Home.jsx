@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
 import { SearchContext } from '../App';
 import { useNavigate } from 'react-router-dom';
 import QueryString from 'qs';
@@ -12,40 +11,36 @@ import JewelryBlock from '../components/jewelryBlock';
 import { Skeleton } from '../components/jewelryBlock/skeleton';
 import Pagination from '../components/pagination/pegination';
 import { setCategory, setFilters, setPage } from '../redux/slices/filterSlice';
-import { setItems, feth } from '../redux/slices/jewelrySlice';
+import { setItems, fetchJewelry } from '../redux/slices/jewelrySlice';
 
 export const Home = () => {
   const navigate = useNavigate(); // создает URL
   const { category, page, sort } = useSelector((state) => state.filterSlice);
-  const { items } = useSelector((state) => state.jewelrySlice);
-  console.log(items);
+  const { items, status } = useSelector((state) => state.jewelrySlice);
+  console.log(status, items);
   const dispatch = useDispatch();
   const isSearch = useRef(false);
   const isUrl = useRef(false);
-  const [loading, setLoading] = useState(true);
   const { searchValue } = useContext(SearchContext); // CONTEXT
 
   const indexCategory = (id) => {
     dispatch(setCategory(id));
   };
 
+  console.log(category, page, sort);
   const setChangePage = (num) => {
     dispatch(setPage(num));
   };
 
-  const fetchPizzas = async () => {
-    setLoading(true);
-
-    try {
-      dispatch(setItems(res.data));
-      setLoading(false);
-      console.log('try');
-    } catch (error) {
-      setLoading(false);
-      console.log(error, 'catch');
-      alert('ошибка при получении пицц');
-    }
-
+  const getJewelry = async () => {
+    dispatch(
+      fetchJewelry({
+        category,
+        page,
+        sort,
+        searchValue,
+      }),
+    );
     window.scrollTo(0, 0);
   };
 
@@ -79,11 +74,7 @@ export const Home = () => {
 
   // Если был первый рендер, то запрашиваем пиццы
   useEffect(() => {
-    window.scrollTo(0, 0); //скролит наверх при рендеренге
-    if (!isSearch.current) {
-      fetchPizzas();
-    }
-    isSearch.current = false;
+    getJewelry();
   }, [category, sort.type, searchValue, page]);
 
   return (
@@ -94,7 +85,7 @@ export const Home = () => {
       </div>
       <h2 className="content__title">Все украшения</h2>
       <div className="content__items">
-        {loading
+        {status === 'loading'
           ? [...new Array(10)].map((_, index) => <Skeleton key={index} />)
           : items
               .filter((obj) => {
