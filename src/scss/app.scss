@@ -25,6 +25,13 @@ body {
 .content {
   padding: 40px 0;
 
+  &__info-error {
+    margin: 60px auto;
+    width: 580px centr;
+    font-size: 40px;
+    color: red;
+  }
+
   &__title {
     margin: 35px 0;
   }

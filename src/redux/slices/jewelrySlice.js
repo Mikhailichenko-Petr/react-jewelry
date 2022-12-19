@@ -31,6 +31,7 @@ const jewelrySlice = createSlice({
   extraReducers: {
     [fetchJewelry.pending]: (state) => {
       state.status = 'loading';
+      state.items = [];
     },
     [fetchJewelry.fulfilled]: (state, action) => {
       state.items = action.payload;

@@ -75,7 +75,7 @@ export const Home = () => {
   // Если был первый рендер, то запрашиваем пиццы
   useEffect(() => {
     getJewelry();
-  }, [category, sort.type, searchValue, page]);
+  }, [category, sort, searchValue, page]);
 
   return (
     <div className="container">
@@ -85,16 +85,22 @@ export const Home = () => {
       </div>
       <h2 className="content__title">Все украшения</h2>
       <div className="content__items">
-        {status === 'loading'
-          ? [...new Array(10)].map((_, index) => <Skeleton key={index} />)
-          : items
-              .filter((obj) => {
-                if (obj.name.toLowerCase().includes(searchValue.toLowerCase())) {
-                  return true;
-                }
-                return false;
-              })
-              .map((obj) => <JewelryBlock key={obj.id} {...obj} />)}
+        {status === 'error' ? (
+          //если статус запроса ошибка, то
+          <div className="content__info-error">ERROR 404</div>
+        ) : //если статус кода загрузка, то
+        status === 'loading' ? (
+          [...new Array(10)].map((_, index) => <Skeleton key={index} />)
+        ) : (
+          items
+            .filter((obj) => {
+              if (obj.name.toLowerCase().includes(searchValue.toLowerCase())) {
+                return true;
+              }
+              return false;
+            })
+            .map((obj) => <JewelryBlock key={obj.id} {...obj} />)
+        )}
       </div>
       <Pagination cuurentPage={page} onChangePage={(index) => setChangePage(index)} />
     </div>
