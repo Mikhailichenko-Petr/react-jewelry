@@ -1,7 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { SearchContext } from '../App';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import QueryString from 'qs';
 import { useRef } from 'react';
 
@@ -10,24 +9,22 @@ import Categories from '../components/Categories';
 import JewelryBlock from '../components/jewelryBlock';
 import { Skeleton } from '../components/jewelryBlock/skeleton';
 import Pagination from '../components/pagination/pegination';
-import { setCategory, setFilters, setPage } from '../redux/slices/filterSlice';
-import { setItems, fetchJewelry } from '../redux/slices/jewelrySlice';
+import { selectFilter, setCategory, setFilters, setPage } from '../redux/slices/filterSlice';
+import { fetchJewelry, selectSlice } from '../redux/slices/jewelrySlice';
 
 export const Home = () => {
   const navigate = useNavigate(); // создает URL
-  const { category, page, sort } = useSelector((state) => state.filterSlice);
-  const { items, status } = useSelector((state) => state.jewelrySlice);
-  console.log(status, items);
+  const { category, searchValue, page, sort } = useSelector(selectFilter);
+  const { items, status } = useSelector(selectSlice);
   const dispatch = useDispatch();
   const isSearch = useRef(false);
   const isUrl = useRef(false);
-  const { searchValue } = useContext(SearchContext); // CONTEXT
+  // const { searchValue } = useContext(SearchContext); // CONTEXT
 
   const indexCategory = (id) => {
     dispatch(setCategory(id));
   };
 
-  console.log(category, page, sort);
   const setChangePage = (num) => {
     dispatch(setPage(num));
   };
@@ -99,7 +96,11 @@ export const Home = () => {
               }
               return false;
             })
-            .map((obj) => <JewelryBlock key={obj.id} {...obj} />)
+            .map((obj) => (
+              <Link key={obj.id} to={`/product/${obj.id}`}>
+                <JewelryBlock {...obj} />
+              </Link>
+            ))
         )}
       </div>
       <Pagination cuurentPage={page} onChangePage={(index) => setChangePage(index)} />

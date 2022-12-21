@@ -44,6 +44,9 @@ const jewelrySlice = createSlice({
   },
 });
 
+// селектор для более удобного обращения к STATE
+export const selectSlice = (state) => state.jewelrySlice;
+
 export const { setItems } = jewelrySlice.actions;
 
 export default jewelrySlice.reducer;

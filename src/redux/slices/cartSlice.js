@@ -42,6 +42,11 @@ const cartSlice = createSlice({
   },
 });
 
+// селектор для более удобного обращения к STATE
+export const selectCart = (state) => state.cartSlice;
+export const selectCartSlice = (id) => (state) =>
+  state.cartSlice.items.find((obj) => obj.id === id);
+
 export const { setItems, minusItems, clearItems, removeItems } = cartSlice.actions;
 
 export default cartSlice.reducer;
