@@ -19,7 +19,6 @@ const JewelryBlock = ({ id, name, price, imageUrl, sizes, types }) => {
       sizes: sizes[activeSize],
       types: typeName[activeType],
     };
-    console.log(sizes, 'bla', activeSize);
     dispatch(setItems(items));
   };
 
@@ -28,8 +27,10 @@ const JewelryBlock = ({ id, name, price, imageUrl, sizes, types }) => {
   return (
     <div className="jewelry-block-wrapper">
       <div className="jewelry-block">
-        <img className="jewelry-block__image" src={imageUrl} alt="Ring" />
-        <h4 className="jewelry-block__title">{name}</h4>
+        <Link key={id} to={'/product/' + id}>
+          <img className="jewelry-block__image" src={imageUrl} alt="Ring" />
+          <h4 className="jewelry-block__title">{name}</h4>
+        </Link>
         <div className="jewelry-block__selector">
           <ul>
             {types.map((typeId) => (

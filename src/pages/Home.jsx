@@ -19,7 +19,6 @@ export const Home = () => {
   const dispatch = useDispatch();
   const isSearch = useRef(false);
   const isUrl = useRef(false);
-  // const { searchValue } = useContext(SearchContext); // CONTEXT
 
   const indexCategory = (id) => {
     dispatch(setCategory(id));
@@ -96,11 +95,7 @@ export const Home = () => {
               }
               return false;
             })
-            .map((obj) => (
-              <Link key={obj.id} to={`/product/${obj.id}`}>
-                <JewelryBlock {...obj} />
-              </Link>
-            ))
+            .map((obj) => <JewelryBlock key={obj.id} {...obj} />)
         )}
       </div>
       <Pagination cuurentPage={page} onChangePage={(index) => setChangePage(index)} />

@@ -1,18 +1,20 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 export const Product = () => {
   const [product, setProduct] = useState();
   const { id } = useParams(); // позволяет вытащить ID с "/product/:id"
+  const navigate = useNavigate(); //позволяет перейти к указаной странице
   useEffect(() => {
     async function fetch() {
       try {
         const { data } = await axios.get(`https://632e4bcbf9b533cc58ee4523.mockapi.io/items/${id}`);
         setProduct(data);
       } catch (error) {
-        console.error(product, 'ошибка', error);
+        alert('ошибка при получении изделия');
+        navigate('/');
       }
     }
     fetch();
