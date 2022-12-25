@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
-export const Product = () => {
-  const [product, setProduct] = useState();
+export const Product: React.FC = () => {
+  const [product, setProduct] = useState<{imageUrl:string,name:string,price:number}>();
   const { id } = useParams(); // позволяет вытащить ID с "/product/:id"
   const navigate = useNavigate(); //позволяет перейти к указаной странице
   useEffect(() => {
@@ -21,8 +21,8 @@ export const Product = () => {
   }, []);
 
   if (!product) {
-    return 'Загрузка...';
-  }
+    return <>'Загрузка...';</>
+  }//если пиццы еще не загрузились, пиши загрузку 
 
   return (
     <div className="container container--cart">
