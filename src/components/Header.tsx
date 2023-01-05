@@ -7,7 +7,7 @@ import Search from './search/search';
 
 const Header = () => {
   const { totalPrice, items } = useSelector(selectCart); // вытаскиваем общую сумму и кольчество товаров
-  const totalCount = items.reduce((sum, item) => item.count + sum, 0); // достаем из каждого товара сумму и присваеваем
+  const totalCount = items.reduce((sum:number, item:any) => item.count + sum, 0); // достаем из каждого товара сумму и присваеваем
   const { pathname } = useLocation(); // позволяет обновить hash при переходе
 
   return (

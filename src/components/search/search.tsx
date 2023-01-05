@@ -11,23 +11,25 @@ import styles from './search.module.scss';
 const Search = () => {
   const dispatch = useDispatch();
   const [value, setValue] = useState(''); // локальный стейт для debounce
-  const inputRef = useRef(); // обращение к элементу
+  const inputRef = useRef<HTMLInputElement>(null); // обращение к элементу
 
   const onClickClear = () => {
     //отчистка при нажатии
     dispatch(setSearchValue('')); // диспач в стейт пустой строки при отчищении
     setValue(''); // локальный стейт
-    inputRef.current.focus(); // при наведении
+    if(inputRef.current){
+      inputRef.current.focus();
+    } // при наведении
   };
 
   const updateSearchInput = useCallback(
-    debounce((str) => {
+    debounce((str:string|number) => {
       dispatch(setSearchValue(str)); // диспач введенной строки через 200мс.
     }, 200),
     [],
   ); // срабатывает перерисовка функции только после debounce
 
-  const onChangeInput = (e) => {
+  const onChangeInput = (e:any) => {
     setValue(e.target.value); // сохраняем в локальный стейт значение
     updateSearchInput(e.target.value); //передаем строку в updateSearchInput
   };

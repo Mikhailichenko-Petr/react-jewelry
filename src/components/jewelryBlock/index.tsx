@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { selectCartSlice, setItems } from '../../redux/slices/cartSlice';
 
-const JewelryBlock = ({ id, name, price, imageUrl, sizes, types }) => {
+type JewelryBlockTypes={ id:number, name:string, price:number, imageUrl:string, sizes:number[], types:number[] }
+
+const JewelryBlock:React.FC<JewelryBlockTypes> = ({ id, name, price, imageUrl, sizes, types }) => {
   const cartItem = useSelector(selectCartSlice(id));
   const dispatch = useDispatch();
   const [activeSize, setActiveSize] = useState(0);

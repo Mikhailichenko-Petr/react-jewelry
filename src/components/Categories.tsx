@@ -1,6 +1,9 @@
-import { useState } from 'react';
-
-const Categories = ({ value, indexCategory }) => {
+import React from "react";
+type categoriesType={
+  value:number;
+  indexCategory:any;
+}
+const Categories:React.FC<categoriesType> = ({ value, indexCategory }) => {
   const category = ['Все', 'Кольца', 'Серьги', 'Браслеты', 'Подвески', 'Цепи'];
 
   return (
