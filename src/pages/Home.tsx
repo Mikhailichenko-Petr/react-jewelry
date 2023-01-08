@@ -11,8 +11,10 @@ import { Skeleton } from '../components/jewelryBlock/skeleton';
 import Pagination from '../components/pagination/pegination';
 import { selectFilter, setCategory, setFilters, setPage } from '../redux/slices/filterSlice';
 import { fetchJewelry, selectSlice } from '../redux/slices/jewelrySlice';
+import ts from 'typescript';
 
-export const Home = () => {
+
+export const Home:React.FC = () => {
   const navigate = useNavigate(); // создает URL
   const { category, searchValue, page, sort } = useSelector(selectFilter);
   const { items, status } = useSelector(selectSlice);
@@ -20,16 +22,17 @@ export const Home = () => {
   const isSearch = useRef(false);
   const isUrl = useRef(false);
 
-  const indexCategory = (id) => {
+  const indexCategory = (id:number) => {
     dispatch(setCategory(id));
   };
 
-  const setChangePage = (num) => {
+  const setChangePage = (num:number) => {
     dispatch(setPage(num));
   };
 
-  const getJewelry = async () => {
+  const getJewelry = async () => {  
     dispatch(
+      // @ts-ignore
       fetchJewelry({
         category,
         page,
@@ -89,16 +92,16 @@ export const Home = () => {
           [...new Array(10)].map((_, index) => <Skeleton key={index} />)
         ) : (
           items
-            .filter((obj) => {
+            .filter((obj:any) => {
               if (obj.name.toLowerCase().includes(searchValue.toLowerCase())) {
                 return true;
               }
               return false;
             })
-            .map((obj) => <JewelryBlock key={obj.id} {...obj} />)
+            .map((obj:any) => <JewelryBlock key={obj.id} {...obj} />)
         )}
       </div>
-      <Pagination cuurentPage={page} onChangePage={(index) => setChangePage(index)} />
+      <Pagination cuurentPage={page} onChangePage={(index:number) => setChangePage(index)} />
     </div>
   );
 };
