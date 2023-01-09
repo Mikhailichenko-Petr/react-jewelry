@@ -1,7 +1,7 @@
 import React from "react";
 type categoriesType={
   value:number;
-  indexCategory:any;
+  indexCategory:(index:number) => void;
 }
 const Categories:React.FC<categoriesType> = ({ value, indexCategory }) => {
   const category = ['Все', 'Кольца', 'Серьги', 'Браслеты', 'Подвески', 'Цепи'];

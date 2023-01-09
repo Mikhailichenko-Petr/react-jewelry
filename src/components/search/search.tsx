@@ -1,5 +1,5 @@
 import debounce from 'lodash.debounce';
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { useCallback } from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -29,7 +29,7 @@ const Search = () => {
     [],
   ); // срабатывает перерисовка функции только после debounce
 
-  const onChangeInput = (e:any) => {
+  const onChangeInput = (e:React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value); // сохраняем в локальный стейт значение
     updateSearchInput(e.target.value); //передаем строку в updateSearchInput
   };

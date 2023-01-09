@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { selectCartSlice, setItems } from '../../redux/slices/cartSlice';
+import { CartItemsType, selectCartSlice, setItems } from '../../redux/slices/cartSlice';
 
-type JewelryBlockTypes={ id:number, name:string, price:number, imageUrl:string, sizes:number[], types:number[] }
+type JewelryBlockTypes={ id:string, name:string, price:number, imageUrl:string, sizes:number[], types:number[] }
 
 const JewelryBlock:React.FC<JewelryBlockTypes> = ({ id, name, price, imageUrl, sizes, types }) => {
   const cartItem = useSelector(selectCartSlice(id));
@@ -13,13 +13,14 @@ const JewelryBlock:React.FC<JewelryBlockTypes> = ({ id, name, price, imageUrl, s
   const typeName = ['самовывоз', 'доставка'];
 
   const onClick = () => {
-    const items = {
+    const items:CartItemsType = {
       id,
       name,
       price,
       imageUrl,
       sizes: sizes[activeSize],
       types: typeName[activeType],
+      count: 0
     };
     dispatch(setItems(items));
   };

@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,6 +7,9 @@ import { selectSort, setSort } from '../redux/slices/filterSlice';
 type sortItem = {
   name:string;
   type:string;
+}
+type MouseEventType = MouseEvent & {
+  path: Node[];
 }
 
 export const sortType: sortItem[] = [
@@ -27,8 +30,9 @@ const Sort = () => {
   };
 
   useEffect(() => {
-    const heandelClick = (e:any) => {
-      if (!e.path.includes(sortRef.current)) {
+    const heandelClick = (e:MouseEvent) => {
+      const _event = e as MouseEventType
+      if (sortRef.current && !_event.path.includes(sortRef.current)) {
         setOpen(false);
       }
     };

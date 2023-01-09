@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import QueryString from 'qs';
 import { useRef } from 'react';
 
@@ -11,7 +11,7 @@ import { Skeleton } from '../components/jewelryBlock/skeleton';
 import Pagination from '../components/pagination/pegination';
 import { selectFilter, setCategory, setFilters, setPage } from '../redux/slices/filterSlice';
 import { fetchJewelry, selectSlice } from '../redux/slices/jewelrySlice';
-import ts from 'typescript';
+
 
 
 export const Home:React.FC = () => {
@@ -32,7 +32,6 @@ export const Home:React.FC = () => {
 
   const getJewelry = async () => {  
     dispatch(
-      // @ts-ignore
       fetchJewelry({
         category,
         page,
