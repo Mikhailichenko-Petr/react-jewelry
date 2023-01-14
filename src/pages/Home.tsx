@@ -11,7 +11,7 @@ import { Skeleton } from '../components/jewelryBlock/skeleton';
 import Pagination from '../components/pagination/pegination';
 import { FilterSliceType, selectFilter, setCategory, setFilters, setPage } from '../redux/slices/filterSlice';
 import { fetchJewelry, FethDataType, selectSlice } from '../redux/slices/jewelrySlice';
-import { dispatchUp } from '../redux/store';
+import { DispatchUp } from '../redux/store';
 
 
 
@@ -19,7 +19,7 @@ export const Home:React.FC = () => {
   const navigate = useNavigate(); // создает URL
   const { category, searchValue, page, sort } = useSelector(selectFilter);
   const { items, status } = useSelector(selectSlice);
-  const dispatch = dispatchUp();
+  const dispatch = DispatchUp();
   const isSearch = useRef(false);
   const isUrl = useRef(false);
 
@@ -44,41 +44,41 @@ export const Home:React.FC = () => {
   };
 
   // Если изменили параметры и был первый рендер
-  useEffect(() => {
-    if (isUrl.current) {
-      const quertyString = QueryString.stringify({
-        sortProperty: sort.type,
-        category,
-        page,
-      }); // создаем URL
-      navigate(`?${quertyString}`);
-    }
-    isUrl.current = true;
-  }, [category, sort.type, page]);
+  // useEffect(() => {
+  //   if (isUrl.current) {
+  //     const quertyString = QueryString.stringify({
+  //       sortProperty: sort.type,
+  //       category,
+  //       page,
+  //     }); // создаем URL
+  //     navigate(`?${quertyString}`);
+  //   }
+  //   isUrl.current = true;
+  // }, [category, sort.type, page]);
 
   // Если был первый рендер, то проверяем URl-параметры и сохраняем в STATE
-  useEffect(() => {
-    if (window.location.search) {
-      const params = QueryString.parse(window.location.search.substring(1))as unknown as FethDataType;
-      const sort = sortType.find((obj) => obj.type === params.sort.type);
-      if(sort){
-        params.sort = sort
-      }
-      dispatch(
-        setFilters({
-          searchValue: params.searchValue,
-  category: params.category,
-  page: params.page,
-  sort: params.sort,
-        }),
-         //     searchValue: params.search,
-    //     categoryId: Number(params.category),
-    //     currentPage: Number(params.currentPage),
-    //     sort: sortObj || sortList[0]
-      );
-      isSearch.current = true;
-    } // передает в STATE URL
-  }, []);
+  // useEffect(() => {
+  //   if (window.location.search) {
+  //     const params = QueryString.parse(window.location.search.substring(1))as unknown as FethDataType;
+  //     const sort = sortType.find((obj) => obj.type === params.sort.type);
+  //     if(sort){
+  //       params.sort = sort
+  //     }
+  //     dispatch(
+  //       setFilters({
+  //         searchValue: params.searchValue,
+  // category: params.category,
+  // page: params.page,
+  // sort: params.sort,
+  //       }),
+  //        //     searchValue: params.search,
+  //   //     categoryId: Number(params.category),
+  //   //     currentPage: Number(params.currentPage),
+  //   //     sort: sortObj || sortList[0]
+  //     );
+  //     isSearch.current = true;
+  //   } // передает в STATE URL
+  // }, []);
 
   // Если был первый рендер, то запрашиваем пиццы
   useEffect(() => {

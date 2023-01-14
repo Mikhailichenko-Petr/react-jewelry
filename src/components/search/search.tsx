@@ -23,7 +23,7 @@ const Search = () => {
   };
 
   const updateSearchInput = useCallback(
-    debounce((str:string|number) => {
+    debounce((str:string) => {
       dispatch(setSearchValue(str)); // диспач введенной строки через 200мс.
     }, 200),
     [],

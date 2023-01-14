@@ -14,7 +14,7 @@ const CartItems:React.FC<CartItemsType> = ({ id, name, types, sizes, price, coun
   const dispath = useDispatch();
 
   const onClickPlus = () => {
-    dispath(setItems({id}));
+    dispath(setItems({id}as CartItemsType));
   };
 
   const onClickMinus = () => {

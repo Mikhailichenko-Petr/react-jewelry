@@ -4,10 +4,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectSort, setSort, SortPropertyEnum, SortType } from '../redux/slices/filterSlice';
 
-// type s = {
-//   name:string;
-//   type:sort;
-// }
+
 type MouseEventType = MouseEvent & {
   path: Node[];
 }
