@@ -2,20 +2,20 @@ import React, { useRef } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectSort, setSort } from '../redux/slices/filterSlice';
+import { selectSort, setSort, SortPropertyEnum, SortType } from '../redux/slices/filterSlice';
 
-type sortItem = {
-  name:string;
-  type:string;
-}
+// type s = {
+//   name:string;
+//   type:sort;
+// }
 type MouseEventType = MouseEvent & {
   path: Node[];
 }
 
-export const sortType: sortItem[] = [
-  { name: 'популярности', type: 'rating' },
-  { name: 'цене', type: 'price' },
-  { name: 'алфавиту', type: 'title' },
+export const sortType: SortType[] = [
+  { name: 'популярности', type: SortPropertyEnum.RATING },
+  { name: 'цене', type: SortPropertyEnum.PRICE },
+  { name: 'алфавиту', type: SortPropertyEnum.TITLE },
 ];
 
 const Sort = () => {
@@ -24,7 +24,7 @@ const Sort = () => {
   const sortRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
 
-  const setActiveIndex = (type:sortItem) => {
+  const setActiveIndex = (type:SortType) => {
     dispatch(setSort(type));
     setOpen(false);
   };

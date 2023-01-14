@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import QueryString from 'qs';
 import { useRef } from 'react';
@@ -9,8 +9,9 @@ import Categories from '../components/Categories';
 import JewelryBlock from '../components/jewelryBlock';
 import { Skeleton } from '../components/jewelryBlock/skeleton';
 import Pagination from '../components/pagination/pegination';
-import { selectFilter, setCategory, setFilters, setPage } from '../redux/slices/filterSlice';
-import { fetchJewelry, selectSlice } from '../redux/slices/jewelrySlice';
+import { FilterSliceType, selectFilter, setCategory, setFilters, setPage } from '../redux/slices/filterSlice';
+import { fetchJewelry, FethDataType, selectSlice } from '../redux/slices/jewelrySlice';
+import { dispatchUp } from '../redux/store';
 
 
 
@@ -18,7 +19,7 @@ export const Home:React.FC = () => {
   const navigate = useNavigate(); // создает URL
   const { category, searchValue, page, sort } = useSelector(selectFilter);
   const { items, status } = useSelector(selectSlice);
-  const dispatch = useDispatch();
+  const dispatch = dispatchUp();
   const isSearch = useRef(false);
   const isUrl = useRef(false);
 
@@ -58,13 +59,22 @@ export const Home:React.FC = () => {
   // Если был первый рендер, то проверяем URl-параметры и сохраняем в STATE
   useEffect(() => {
     if (window.location.search) {
-      const params = QueryString.parse(window.location.search.substring(1));
-      const sort = sortType.find((obj) => obj.type === params.sortProperty);
+      const params = QueryString.parse(window.location.search.substring(1))as unknown as FethDataType;
+      const sort = sortType.find((obj) => obj.type === params.sort.type);
+      if(sort){
+        params.sort = sort
+      }
       dispatch(
         setFilters({
-          ...params,
-          sort,
+          searchValue: params.searchValue,
+  category: params.category,
+  page: params.page,
+  sort: params.sort,
         }),
+         //     searchValue: params.search,
+    //     categoryId: Number(params.category),
+    //     currentPage: Number(params.currentPage),
+    //     sort: sortObj || sortList[0]
       );
       isSearch.current = true;
     } // передает в STATE URL
