@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import QueryString from 'qs';
@@ -8,7 +8,7 @@ import Sort, { sortType } from '../components/Sort';
 import Categories from '../components/Categories';
 import JewelryBlock from '../components/jewelryBlock';
 import { Skeleton } from '../components/jewelryBlock/skeleton';
-import Pagination from '../components/pagination/pegination';
+import Pagination from '../components/pagination/pagination';
 import { FilterSliceType, selectFilter, setCategory, setFilters, setPage } from '../redux/slices/filterSlice';
 import { fetchJewelry, FethDataType, selectSlice } from '../redux/slices/jewelrySlice';
 import { DispatchUp } from '../redux/store';
@@ -16,20 +16,20 @@ import { DispatchUp } from '../redux/store';
 
 
 export const Home:React.FC = () => {
-  const navigate = useNavigate(); // создает URL
+  // const navigate = useNavigate(); // создает URL
   const { category, searchValue, page, sort } = useSelector(selectFilter);
   const { items, status } = useSelector(selectSlice);
   const dispatch = DispatchUp();
-  const isSearch = useRef(false);
-  const isUrl = useRef(false);
+  // const isSearch = useRef(false);
+  // const isUrl = useRef(false);
 
-  const indexCategory = (id:number) => {
+  const indexCategory = useCallback((id:number) => {
     dispatch(setCategory(id));
-  };
+  },[])
 
-  const setChangePage = (num:number) => {
+  const setChangePage = useCallback((num:number) => {
     dispatch(setPage(num));
-  };
+  },[])
 
   const getJewelry = async () => {  
     dispatch(
@@ -85,11 +85,12 @@ export const Home:React.FC = () => {
     getJewelry();
   }, [category, sort, searchValue, page]);
 
+
   return (
     <div className="container">
       <div className="content__top">
         <Categories value={category} indexCategory={indexCategory} />
-        <Sort />
+        <Sort sort={sort}/>
       </div>
       <h2 className="content__title">Все украшения</h2>
       <div className="content__items">
