@@ -1,24 +1,14 @@
+import { CartSliceType, CartItemsType } from './types';
+
+import { TotalPrice } from '../../utils/TotalPriceLocalStorage';
+import { GetCartLocalStorage } from '../../utils/GetCartLocalStorage';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../store';
 
-export type CartItemsType={
-  id:string;
-  name:string;
-  types:string;
-  sizes:number;
-  price:number;
-  count:number;
-  imageUrl:string;
-}
-
-interface CartSliceType{
-  totalPrice: number;
-  items: CartItemsType[]
-}
+const {totalPrice,items} = GetCartLocalStorage()
 
 const initialState:CartSliceType = {
-  totalPrice: 0,
-  items: [],
+  totalPrice,
+  items
 };
 
 const cartSlice = createSlice({
@@ -35,9 +25,7 @@ const cartSlice = createSlice({
           count: 1,
         });
       }
-      state.totalPrice = state.items.reduce((sum, arr) => {
-        return arr.count * arr.price + sum;
-      }, 0);
+      state.totalPrice = TotalPrice(state.items)
     },
     minusItems(state, action:PayloadAction<string>) {
       const findItem = state.items.find((obj) => obj.id === action.payload);
@@ -58,10 +46,6 @@ const cartSlice = createSlice({
   },
 });
 
-// селектор для более удобного обращения к STATE
-export const selectCart = (state:RootState) => state.cartSlice;
-export const selectCartSlice = (id:string) => (state:RootState) =>
-  state.cartSlice.items.find((obj) => obj.id === id);
 
 export const { setItems, minusItems, clearItems, removeItems } = cartSlice.actions;
 

@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { setSearchValue } from '../../redux/slices/filterSlice';
+import { setSearchValue } from '../../redux/filter/filterSlice';
 
 import styles from './search.module.scss';
 

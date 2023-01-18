@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { CartItemsType, selectCartSlice, setItems } from '../../redux/slices/cartSlice';
+import { setItems } from '../../redux/cart/cartSlice';
+import { selectCartSlice } from '../../redux/cart/selectors';
+import { CartItemsType } from '../../redux/cart/types';
+
 
 type JewelryBlockTypes={ id:string, name:string, price:number, imageUrl:string, sizes:number[], types:number[] }
 

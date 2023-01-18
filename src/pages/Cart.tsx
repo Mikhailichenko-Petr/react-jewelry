@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 import CartEmpty from '../components/search/cartEmpty';
 
 import CartItems from '../components/search/cartItems';
-import { clearItems, selectCart } from '../redux/slices/cartSlice';
+import { clearItems } from '../redux/cart/cartSlice';
+import { selectCart } from '../redux/cart/selectors';
+
 
 export const Cart:React.FC = () => {
   const { items, totalPrice } = useSelector(selectCart);

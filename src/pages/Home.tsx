@@ -9,9 +9,11 @@ import Categories from '../components/Categories';
 import JewelryBlock from '../components/jewelryBlock';
 import { Skeleton } from '../components/jewelryBlock/skeleton';
 import Pagination from '../components/pagination/pagination';
-import { FilterSliceType, selectFilter, setCategory, setFilters, setPage } from '../redux/slices/filterSlice';
-import { fetchJewelry, FethDataType, selectSlice } from '../redux/slices/jewelrySlice';
 import { DispatchUp } from '../redux/store';
+import { selectFilter } from '../redux/filter/selectors';
+import { selectSlice } from '../redux/jewelry/selectors';
+import { setCategory, setPage } from '../redux/filter/filterSlice';
+import { fetchJewelry } from '../redux/jewelry/asyncAction';
 
 
 

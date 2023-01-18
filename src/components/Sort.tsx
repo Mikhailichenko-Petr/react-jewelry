@@ -2,7 +2,9 @@ import React, { useCallback, useRef } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, } from 'react-redux';
-import {  setSort, SortPropertyEnum, SortType } from '../redux/slices/filterSlice';
+import { setSort } from '../redux/filter/filterSlice';
+import { SortPropertyEnum, SortType } from '../redux/filter/types';
+
 
 
 type MouseEventType = MouseEvent & {

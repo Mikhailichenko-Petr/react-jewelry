@@ -1,14 +1,26 @@
+import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
+import { json } from 'stream/consumers';
 
 import logo from '../assets/img/Jewelry-icon.png';
-import { selectCart } from '../redux/slices/cartSlice';
+import { selectCart } from '../redux/cart/selectors';
+
 import Search from './search/search';
 
 const Header = () => {
   const { totalPrice, items } = useSelector(selectCart); // вытаскиваем общую сумму и кольчество товаров
   const totalCount = items.reduce((sum:number, item:any) => item.count + sum, 0); // достаем из каждого товара сумму и присваеваем
   const { pathname } = useLocation(); // позволяет обновить hash при переходе
+  const isMount = useRef(false)
+
+  useEffect(()=>{
+  if(isMount.current){    
+    const storage = JSON.stringify(items);
+    localStorage.setItem('items',storage)
+  }
+  isMount.current = true
+  },[items])
 
   return (
     <div className="header">
