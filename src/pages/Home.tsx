@@ -25,6 +25,12 @@ export const Home:React.FC = () => {
   // const isSearch = useRef(false);
   // const isUrl = useRef(false);
 
+  import('../utils/chunk')
+  .then(({ add }) => {
+   console.log( add(12,22));
+   
+  })
+
   const indexCategory = useCallback((id:number) => {
     dispatch(setCategory(id));
   },[])

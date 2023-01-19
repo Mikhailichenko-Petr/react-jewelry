@@ -8,7 +8,7 @@ import { clearItems } from '../redux/cart/cartSlice';
 import { selectCart } from '../redux/cart/selectors';
 
 
-export const Cart:React.FC = () => {
+const Cart:React.FC = () => {
   const { items, totalPrice } = useSelector(selectCart);
   const dispatch = useDispatch();
 
@@ -142,3 +142,5 @@ export const Cart:React.FC = () => {
     </div>
   );
 };
+
+export default Cart
