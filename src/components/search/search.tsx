@@ -8,7 +8,7 @@ import { setSearchValue } from '../../redux/filter/filterSlice';
 
 import styles from './search.module.scss';
 
-const Search = () => {
+export const Search = () => {
   const dispatch = useDispatch();
   const [value, setValue] = useState(''); // локальный стейт для debounce
   const inputRef = useRef<HTMLInputElement>(null); // обращение к элементу
@@ -88,4 +88,3 @@ const Search = () => {
     </div>
   );
 };
-export default Search;

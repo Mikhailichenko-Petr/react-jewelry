@@ -21,7 +21,7 @@ export const sortType: SortType[] = [
   { name: 'алфавиту', type: SortPropertyEnum.TITLE },
 ];
 
-const Sort: React.FC<SortProps> = React.memo(({sort}) => {
+export const Sort: React.FC<SortProps> = React.memo(({sort}) => {
 
   const dispatch = useDispatch();
   const sortRef = useRef<HTMLDivElement>(null);
@@ -79,4 +79,3 @@ const Sort: React.FC<SortProps> = React.memo(({sort}) => {
     </div>
   );
 })
-export default Sort;

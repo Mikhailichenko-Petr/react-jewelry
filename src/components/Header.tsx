@@ -5,10 +5,11 @@ import { json } from 'stream/consumers';
 
 import logo from '../assets/img/Jewelry-icon.png';
 import { selectCart } from '../redux/cart/selectors';
+import { Search } from './imports';
 
-import Search from './search/search';
 
-const Header = () => {
+
+export const Header = () => {
   const { totalPrice, items } = useSelector(selectCart); // вытаскиваем общую сумму и кольчество товаров
   const totalCount = items.reduce((sum:number, item:any) => item.count + sum, 0); // достаем из каждого товара сумму и присваеваем
   const { pathname } = useLocation(); // позволяет обновить hash при переходе
@@ -76,4 +77,3 @@ const Header = () => {
     </div>
   );
 };
-export default Header;

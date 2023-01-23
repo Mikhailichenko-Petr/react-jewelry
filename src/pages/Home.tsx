@@ -4,11 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import QueryString from 'qs';
 import { useRef } from 'react';
 
-import Sort, { sortType } from '../components/Sort';
-import Categories from '../components/Categories';
-import JewelryBlock from '../components/jewelryBlock';
-import { Skeleton } from '../components/jewelryBlock/skeleton';
-import Pagination from '../components/pagination/pagination';
+import { Sort,Categories,JewelryBlock,Skeleton,Pagination, } from '../components/imports';
 import { DispatchUp } from '../redux/store';
 import { selectFilter } from '../redux/filter/selectors';
 import { selectSlice } from '../redux/jewelry/selectors';

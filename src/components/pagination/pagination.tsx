@@ -5,7 +5,7 @@ import styles from './pagination.module.scss';
 
 type paginationType={ cuurentPage:number, onChangePage:(e:number)=>void }
 
-const Pagination:React.FC<paginationType> = ({ cuurentPage, onChangePage }) => {
+export const Pagination:React.FC<paginationType> = ({ cuurentPage, onChangePage }) => {
   useWhyDidYouUpdate('Pagination',{ cuurentPage, onChangePage })
   return (
     <div>
@@ -22,4 +22,3 @@ const Pagination:React.FC<paginationType> = ({ cuurentPage, onChangePage }) => {
     </div>
   );
 };
-export default Pagination;

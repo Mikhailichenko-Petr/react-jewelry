@@ -8,7 +8,7 @@ import { CartItemsType } from '../../redux/cart/types';
 
 type JewelryBlockTypes={ id:string, name:string, price:number, imageUrl:string, sizes:number[], types:number[] }
 
-const JewelryBlock:React.FC<JewelryBlockTypes> = ({ id, name, price, imageUrl, sizes, types }) => {
+export const JewelryBlock:React.FC<JewelryBlockTypes> = ({ id, name, price, imageUrl, sizes, types }) => {
   const cartItem = useSelector(selectCartSlice(id));
   const dispatch = useDispatch();
   const [activeSize, setActiveSize] = useState(0);
@@ -81,4 +81,4 @@ const JewelryBlock:React.FC<JewelryBlockTypes> = ({ id, name, price, imageUrl, s
     </div>
   );
 };
-export default JewelryBlock;
+

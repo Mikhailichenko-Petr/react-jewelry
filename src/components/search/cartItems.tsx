@@ -1,10 +1,9 @@
-import clsx from 'clsx';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { minusItems, removeItems, setItems } from '../../redux/cart/cartSlice';
 import { CartItemsType } from '../../redux/cart/types';
 
-const CartItems:React.FC<CartItemsType> = ({ id, name, types, sizes, price, count, imageUrl }) => {
+export const CartItems:React.FC<CartItemsType> = ({ id, name, types, sizes, price, count, imageUrl }) => {
   const dispath = useDispatch();
 
   const onClickPlus = () => {
@@ -38,7 +37,7 @@ const CartItems:React.FC<CartItemsType> = ({ id, name, types, sizes, price, coun
       </div>
       <div className="cart__item-count">
         <button
-          disabled={count === 1}//если меньше 2 то скработает дизейбел
+          disabled={count === 1}//если меньше 2 то сработает дизейбел
           onClick={onClickMinus}
           className='button button--outline button--circle cart__item-count-minus'>
           <svg
@@ -103,4 +102,3 @@ const CartItems:React.FC<CartItemsType> = ({ id, name, types, sizes, price, coun
     </div>
   );
 };
-export default CartItems;

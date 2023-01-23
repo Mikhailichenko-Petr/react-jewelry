@@ -2,7 +2,7 @@
 ////// ДЛЯ ДИНАМИЧНЫХ СТРАНИЦ   ---Outlet---    App.js  Line15-18 строку
 import { Outlet } from 'react-router-dom';
 
-import Header from '../components/Header';
+import {Header} from '../components/imports';
 
 const Layout = () => {
   return (

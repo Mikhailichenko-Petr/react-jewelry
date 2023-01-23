@@ -1,12 +1,10 @@
-import { useWhyDidYouUpdate } from "ahooks";
-import React, { useMemo } from "react";
+import React from "react";
 type categoriesType={
   value:number;
   indexCategory:(index:number) => void;
 }
-const Categories:React.FC<categoriesType> = React.memo(({ value, indexCategory }) => {
+export const Categories:React.FC<categoriesType> = React.memo(({ value, indexCategory }) => {
 
-  useWhyDidYouUpdate('Categories',{value,indexCategory})
   const category = ['Все', 'Кольца', 'Серьги', 'Браслеты', 'Подвески', 'Цепи'];
 
   return (
@@ -26,4 +24,3 @@ const Categories:React.FC<categoriesType> = React.memo(({ value, indexCategory }
     </div>
   );
 })
-export default Categories;
