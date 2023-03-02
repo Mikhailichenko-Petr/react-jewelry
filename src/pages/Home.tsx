@@ -1,10 +1,8 @@
 import { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import QueryString from 'qs';
-import { useRef } from 'react';
 
-import { Sort,Categories,JewelryBlock,Skeleton,Pagination, } from '../components/imports';
+
+import { Sort, Categories, JewelryBlock, Skeleton, Pagination, } from '../components/imports';
 import { DispatchUp } from '../redux/store';
 import { selectFilter } from '../redux/filter/selectors';
 import { selectSlice } from '../redux/jewelry/selectors';
@@ -13,7 +11,7 @@ import { fetchJewelry } from '../redux/jewelry/asyncAction';
 
 
 
-export const Home:React.FC = () => {
+export const Home: React.FC = () => {
   // const navigate = useNavigate(); // создает URL
   const { category, searchValue, page, sort } = useSelector(selectFilter);
   const { items, status } = useSelector(selectSlice);
@@ -21,21 +19,16 @@ export const Home:React.FC = () => {
   // const isSearch = useRef(false);
   // const isUrl = useRef(false);
 
-  import('../utils/chunk')
-  .then(({ add }) => {
-   console.log( add(12,22));
-   
-  })
 
-  const indexCategory = useCallback((id:number) => {
+  const indexCategory = useCallback((id: number) => {
     dispatch(setCategory(id));
-  },[])
+  }, [])
 
-  const setChangePage = useCallback((num:number) => {
+  const setChangePage = useCallback((num: number) => {
     dispatch(setPage(num));
-  },[])
+  }, [])
 
-  const getJewelry = async () => {  
+  const getJewelry = async () => {
     dispatch(
       fetchJewelry({
         category,
@@ -94,7 +87,7 @@ export const Home:React.FC = () => {
     <div className="container">
       <div className="content__top">
         <Categories value={category} indexCategory={indexCategory} />
-        <Sort sort={sort}/>
+        <Sort sort={sort} />
       </div>
       <h2 className="content__title">Все украшения</h2>
       <div className="content__items">
@@ -102,20 +95,20 @@ export const Home:React.FC = () => {
           //если статус запроса ошибка, то
           <div className="content__info-error">ERROR 404</div>
         ) : //если статус кода загрузка, то
-        status === 'loading' ? (
-          [...new Array(10)].map((_, index) => <Skeleton key={index} />)
-        ) : (
-          items
-            .filter((obj:any) => {
-              if (obj.name.toLowerCase().includes(searchValue.toLowerCase())) {
-                return true;
-              }
-              return false;
-            })
-            .map((obj:any) => <JewelryBlock key={obj.id} {...obj} />)
-        )}
+          status === 'loading' ? (
+            [...new Array(10)].map((_, index) => <Skeleton key={index} />)
+          ) : (
+            items
+              .filter((obj: any) => {
+                if (obj.name.toLowerCase().includes(searchValue.toLowerCase())) {
+                  return true;
+                }
+                return false;
+              })
+              .map((obj: any) => <JewelryBlock key={obj.id} {...obj} />)
+          )}
       </div>
-      <Pagination cuurentPage={page} onChangePage={(index:number) => setChangePage(index)} />
+      <Pagination cuurentPage={page} onChangePage={(index: number) => setChangePage(index)} />
     </div>
   );
 };
